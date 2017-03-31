@@ -1,0 +1,3 @@
+{
+    "timeOut": 10000//define here the playground/fun command timeout (in ms)
+}

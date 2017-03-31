@@ -1,0 +1,15 @@
+{
+    "botPath": "Path/to/directory/Aura_Bot/",//set this to the directory containing aura_bot.js
+    "ownerid": "12345678900000",//write your discord user id here
+    "modrolename": "Moderator",//write the name of your mod role
+    "adminrolename": "Admin",//write the name of your admin role
+    "prefix": "!",//define here which prefix the bot will use
+    "token": "INeedToBeAToken",//place here the bot token
+    "guildID": "IAmAGW2ID",//replace this with your guild wars 2 guild ID
+    "userToken": "?access_token=GuildLeaderAPIKeyHere",//add here the guild leader API key to make use of the guild specific functions
+    "funChannels": [
+        "286641021511794698",
+        "286699372668911626",
+        "285175529299116032"
+    ]//in this array, define the discord channel IDs where the 'playground/fun' commands can be used
+}
