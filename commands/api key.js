@@ -4,12 +4,11 @@ const functions = require("../files/functions.js");
 
 exports.run = (client, message, params) => {
     let details = "";
-    let api_file = "./files/api_keys.json"
+    let api_file = "./files/api_keys.json";
 
     if(!params.length) return message.channel.sendMessage("There was no provided API key, please use \`!help, api key\` for more information on this command.");//if length is 0, return
   
     details = params[0].trim();//remove potential extra whitespace
-    let done = false;
     
     if(details.startsWith("OVERWRITE")) return message.channel.sendMessage("No actions performed. Were you trying to call **"+settings.prefix+"api overwrite key**? ");
 

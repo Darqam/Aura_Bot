@@ -1,7 +1,5 @@
-const functions = require('../files/functions.js');
-
 exports.run = (client, message, params, perms) => {
-    if(message.channel.type === "dm") return messade.channel.sendMessage("Can't set game in DMs.");
+    if(message.channel.type === "dm") return message.channel.sendMessage("Can't set game in DMs.");
     if(!params[0]){ 
         client.user.setGame(null); 
         message.channel.sendMessage("Yes mother, I'll stop playing.");

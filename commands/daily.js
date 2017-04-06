@@ -1,4 +1,3 @@
-const fs = require('fs');
 const functions = require("../files/functions.js");
 
 exports.run = (client, message, params) => {

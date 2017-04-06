@@ -1,4 +1,3 @@
-const fs = require('fs');
 const settings = require('../files/settings.json');
 const functions = require("../files/functions.js");
 
@@ -18,7 +17,7 @@ exports.run = (client, message) => {
         let item_needed = [];
         let item_id = data.map(x => {
             let tmp = x.needed_by.map(z => {return z.count;});//get the individual counts
-            item_needed.push(tmp.reduce(add, 0) - x.count)//sum up all needed counts together (using reduce), and then subtract what is already in treasury
+            item_needed.push(tmp.reduce(add, 0) - x.count);//sum up all needed counts together (using reduce), and then subtract what is already in treasury
             return x.item_id;//return the item_id
         });
 

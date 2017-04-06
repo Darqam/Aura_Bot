@@ -1,14 +1,13 @@
 const functions = require('../files/functions.js');
 
-exports.run = (client, message, params, perms) => {
+exports.run = (client, message) => {
     let url = "https://api.guildwars2.com/v2/quaggans";
     functions.isApiKill(url, function afterUrl(data){
         if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
         let quagganArray = data;
-        let options = data.length - 1;
         (function (quagganArray) {
-            let keys = Object.keys(quagganArray)
+            let keys = Object.keys(quagganArray);
             let result = quagganArray[keys[ keys.length * Math.random() << 0]];
             message.channel.sendMessage("Coo!\nhttps://static.staticwars.com/quaggans/"+result+".jpg");
         })(quagganArray); 

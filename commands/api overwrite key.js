@@ -6,15 +6,7 @@ exports.run = (client, message, params) => {
     let api_file = "./files/api_keys.json"
 
     if(params.length){ details = params[0].trim(); } //remove potential extra whitespace
-    else {
-        message.channel.sendMessage("There was no provided API key, please use \`!help, api overwrite key\` for more information on this command."); 
-        return;
-    }
-    let flag = false;
-    let id_check = "";
-    let length = 0;
-    let content = [];
-    
+    else { return message.channel.sendMessage("There was no provided API key, please use \`!help, api overwrite key\` for more information on this command."); }   
 
     fs.readFile(api_file, 'utf8', function read(err, data){
         if (err){

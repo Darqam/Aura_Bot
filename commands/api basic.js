@@ -1,8 +1,7 @@
-const fs = require('fs');
 const Discord = require("discord.js");
 const functions = require("../files/functions.js");
 
-function sendEmbed(message, data, cap, server, cmdr){
+function sendEmbed(message, data, cap, server, cmdr, type){
     const embed = new Discord.RichEmbed()
         .setTitle(data["name"])
         .setAuthor(message.author.username)
@@ -12,7 +11,7 @@ function sendEmbed(message, data, cap, server, cmdr){
         .addField("Account play time", `${(data["age"]*0.0000115741).toFixed(2)} days`)
         .addField("Ranks", `WvW: ${data["wvw_rank"]}, FotM: ${data["fractal_level"]}`)
         .addField("Daily AP", cap)
-        .addField("Misc", `Account is on ${server}.\n${cmdr}`);
+        .addField("Misc", `${type}\nAccount is on ${server}.\n${cmdr}`);
     message.channel.sendEmbed(
         embed,
         { disableEveryone: true }
@@ -30,8 +29,8 @@ exports.run = (client, message, params) => {
                 if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
                 let server = "";
-                let type = ""
-                let cap = ""
+                let type = "";
+                let cap = "";
                 let cmdr = "";
 
                 let world_id = data["world"];
@@ -45,7 +44,7 @@ exports.run = (client, message, params) => {
                     }
                     let access = data["access"];
                     if(access == "PlayForFree"){ type = "Account is PlayForFree."; }
-                    else if(access == "GuildWars2") { type = "Account owns the base game." }
+                    else if(access == "GuildWars2") { type = "Account owns the base game.";}
                     else if(access == "HeartOfThorns") { type = "Account owns Heart of Thorns."; }
 
                     let daily_ap = data["daily_ap"]+data["monthly_ap"];
@@ -56,7 +55,7 @@ exports.run = (client, message, params) => {
                     if(is_cmdr){ cmdr = "Account does have a commander tag.\n"; }
                     else{ cmdr = "Account does not have a commander tag.\n"; }
 
-                    sendEmbed(message, data, cap, server, cmdr);//simple work around to avoid async sending of data
+                    sendEmbed(message, data, cap, server, cmdr, type);//simple work around to avoid async sending of data
                 });
 
             });	

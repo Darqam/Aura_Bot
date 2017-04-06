@@ -1,7 +1,6 @@
 const fs = require('fs');
 const settings = require('../files/settings.json');
 const variables = require('../files/variables.json')
-const functions = require("../files/functions.js");
 
 exports.run = (client, message, params) => {
 
