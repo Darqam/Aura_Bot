@@ -2,16 +2,15 @@ const https = require('https');
 const request = require('request');
 const Promise = require('bluebird');
 const Feedparser = require('feedparser');
-const moment = require('moment');
 const fs = require('fs');
 
 
 const forumRss = 'https://forum-en.guildwars2.com/forum/info/updates.rss';
-let api_file = "./files/api_keys.json"
+let api_file = "./files/api_keys.json";
 
 var self = module.exports = {
     isApiKill: function(url, cb){
-        var request = https.get(url, function (response) {
+        https.get(url, function (response) {
         // data is streamed in chunks from the server
         // so we have to handle the "data" event 
             var buffer = "", 
@@ -27,6 +26,8 @@ var self = module.exports = {
                 // dump the raw data
                 //console.log(buffer);
                 //console.log("\n");
+                if(err) return console.log(err.message);
+
                 data = JSON.parse(buffer);
                 //console.log(data)
                 try
@@ -46,9 +47,9 @@ var self = module.exports = {
     },
 
     noDups: function(myArray, cb){
-        for(var key in myArray)
+        for(let key in myArray)
         {
-            for(var keyB in myArray)
+            for(let keyB in myArray)
             {
                 if (key != keyB) 
                 {
@@ -66,18 +67,17 @@ var self = module.exports = {
     },
 
     lookupDaily: function(message, data, type, cb){
-        var counter = 0;
-        var ach_entry = [];
-        var ach_string = "";
-        var output = "```\n";
+        let counter = 0;
+        let ach_string = "";
+        let output = "```\n";
         if(data[type].length > 0)//only look things up if there are actual entries
         {
-            for(var key in data[type])
+            for(let key in data[type])
             {
                 counter += 1;
                 ach_string += data[type][key]["id"].toString()+",";
                 if(counter == Object.keys(data[type]).length){//all ids are in an array
-                    var url = "https://api.guildwars2.com/v2/achievements?ids="+ach_string;
+                    let url = "https://api.guildwars2.com/v2/achievements?ids="+ach_string;
                     self.isApiKill(url, function onComplete(ach_arr) {
                         if(ach_arr === false)//if something went booboo
                         {
@@ -85,15 +85,15 @@ var self = module.exports = {
                         }
                         else
                         {
-                            var counterB = 0;
-                            for(var i in ach_arr)
+                            let counterB = 0;
+                            for(let i in ach_arr)
                             {
                                 counterB += 1;
                                 output += ach_arr[i]["name"]+"\n";
                                 
                                 if(counterB == Object.keys(ach_arr).length)
                                 {
-                                    output += "```"
+                                    output += "```";
                                     cb(output);
                                 }
                             }
@@ -109,18 +109,17 @@ var self = module.exports = {
     },
 
     lookupAllDaily: function(message, data, cb){
-        var counter = 0;
-        var counterA = 0;
-        var ach_entry = [];
-        var labels = [];
-        var ach_string = "";
-        var output = "";
-        var currentFlag = "";
+        let counter = 0;
+        let counterA = 0;
+        let labels = [];
+        let ach_string = "";
+        let output = "";
+        let currentFlag = "";
         
         
         if(Object.keys(data).length > 0)//only look things up if there are actual entries
         {
-            for(var keyA in data)
+            for(let keyA in data)
             {
                 var uniqueness = true;
                 counterA += 1;
@@ -137,13 +136,13 @@ var self = module.exports = {
                     {
                         data[keyA][0] = {"id": 0};
                     }
-                    for(var key in data[keyA])
+                    for(let key in data[keyA])
                     {
                         counter += 1;
                         ach_string += data[keyA][key]["id"].toString()+",";
 
                         if((counter == Object.keys(data[keyA]).length) && counterA == Object.keys(data).length){//all ids are in an array
-                            var url = "https://api.guildwars2.com/v2/achievements?ids="+ach_string;
+                            let url = "https://api.guildwars2.com/v2/achievements?ids="+ach_string;
                             self.isApiKill(url, function onComplete(ach_arr) {
                                 if(ach_arr === false)//if something went booboo
                                 {
@@ -151,14 +150,14 @@ var self = module.exports = {
                                 }
                                 else
                                 {
-                                    var sections = Object.keys(labels);
+                                    let sections = Object.keys(labels);
                                     currentFlag = "pve";
-                                    var counterB = 0;
-                                    var counterC = 0;
-                                    var sect_track = 0;
+                                    let counterB = 0;
+                                    let counterC = 0;
+                                    let sect_track = 0;
                                     //output += "All Dailies:\n";
                                     output += "\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
-                                    for(var i in ach_arr)
+                                    for(let i in ach_arr)
                                     {
                                         counterB += 1;
                                         
@@ -174,7 +173,7 @@ var self = module.exports = {
                                         
                                         if(counterB == Object.keys(ach_arr).length)//if we have treated every singly id
                                         {
-                                            output += "```"
+                                            output += "```";
                                             cb(output);
                                         }
                                     }
@@ -243,26 +242,12 @@ var self = module.exports = {
                     resolve(this);
                     read = true;
                 }
-            })
+            });
         });
-    },
-
-    grabMention: function(message, cb){
-        var mentions = message.mentions.users;
-        //var daroId = "129714945238630400";
-        var allMentions = mentions.map(function(mUser){
-            return mUser.id;
-        });
-        var allNames = mentions.map(function(mUser){
-            return mUser.username;
-        });
-        //console.log(user.username+" sent a codec to "+allNames[0]);
-        cb(allMentions[0]);//only want the first mentionned
     },
 
     getUserByName: function(username, message, cb){
-        var found = false;
-        var userList = message.guild.members;
+        let found = false;
         message.guild.members.map(function(mUser){//this will cycle through all roles the member has
             if(username == mUser.displayName){
                 found = true;
@@ -273,8 +258,7 @@ var self = module.exports = {
     },
 
     getUserById: function(Id, message, cb){
-        var found = false;
-        var userList = message.guild.members;
+        let found = false;
         message.guild.members.map(function(mUser){//this will cycle through all roles the member has
             if(Id == mUser.id){
                 found = true;
@@ -284,25 +268,13 @@ var self = module.exports = {
         if(found === false){ cb(false); }
     },
 
-    checkSModAdmin: function(message, cb){
-        var found = false;
-        var stuff = message.member.roles.map(function(mUser){//this will cycle through all roles the member has
-            if((mUser.name === "Admin") || (mUser.name === "Super Moderator"))//look only at these two roles
-            {
-                cb(true);
-                found = true;
-            }
-        });
-        if(found === false){ cb(false); }
-    },
-
     getBaddieList: function(location, cb){
-        var userList = [];
+        let userList = [];
         fs.readFile(location, 'utf8', function read(err, data){
             if (err){
                 throw err;
             }
-            var content = data.split('\n');//split text per line
+            let content = data.split('\n');//split text per line
             (function processInfo(i){
                 if(i<content.length){//if we are going through the entries
                     userList.push(content[i]);
@@ -316,114 +288,20 @@ var self = module.exports = {
         });
     },
 
-    writeBaddieList: function(message, location, badUser, cb){
-        var id_check = badUser.id;
-        fs.readFile(location, 'utf8', function read(err, data){
-            if (err){
-                throw err;
-            }
-            var content = data.split('\n');//split text per line
-            (function processInfo(i){
-                if(i<content.length){//if we are going through the entries
-                    id_check = content[i].split(": ")[0];
-                    if(id_check === badUser.id){
-                        message.channel.sendMessage("User is already on the list. Nothing done");
-                        cb(false);
-                        return;
-                    }
-                    else{
-                        setTimeout(function(){ processInfo(i+1); },0);
-                    }
-                }
-                if(i == content.length)
-                {//if we got here, it means there was no previous entry
-                    
-                    fs.appendFile(location, badUser.id+'\n', function (err) {
-                        if (err) {
-                            message.channel.sendMessage("There was an issue in adding the user to the list.");
-                        } else {
-                            message.channel.sendMessage("User has been added to the list.");
-                            cb(true);
-                        }
-                    })
-                }
-            })(0);
-        });
-    },
-
-    removeFromBaddieList: function(message, location, goodUser, cb){
-
-        var flag = false;
-        var id_check = "";
-        var length = 0;
-        var content = [];
-        
-        fs.readFile(location, 'utf8', function read(err, data){
-            if (err){
-                throw err;
-            }
-            var tmp_arr = data.split('\n');//split text per line
-            length = tmp_arr.length;
-            (function processInfo(i){
-                if(i<length){//if we are going through the entries
-                    id_check = tmp_arr[i];
-                    if(id_check === goodUser.id.toString()){
-                        content.push('')//replace the user entry in the array we have saved						
-                        flag = true;
-                    }
-                    else{ content.push(tmp_arr[i]); }
-                    setTimeout(function(){ processInfo(i+1); },0);
-                }
-                if((i === length) && (flag == true))
-                {//if we got here, we done and there is a change to be made
-                    var tmpWrite = content.join("");
-                    
-                    var file = fs.createWriteStream(location);
-                    file.on('error', function(err) { message.channel.sendMessage("There was an issue in removing user from list."); });
-                    content.forEach(function(v) { if(v.trim() != "") {file.write(v + '\n'); }});
-                    file.end();
-                    message.channel.sendMessage("User has been succesfully removed from list.")
-                }
-                else if((i == content.length) && (flag == false)){ message.channel.sendMessage("Could not find the user on the list, nothing done."); }
-            })(0);
-        })	
-    },
-
     writeToLog: function(message, pass, logPath){
-        var currentdate = new Date(); 
-        var datetime = currentdate.getDate() + "/"
+        let currentdate = new Date(); 
+        let datetime = currentdate.getDate() + "/"
                     + (currentdate.getMonth()+1)  + "/" 
                     + currentdate.getFullYear() + " @ "  
                     + currentdate.getHours() + ":"  
                     + currentdate.getMinutes() + ":" 
                     + currentdate.getSeconds();
-        var toFile = pass+datetime+" : "+message.channel.name+"("+message.channel.type+")/"+message.author.username+" --> "+message.content;
+        let toFile = pass+datetime+" : "+message.channel.name+"("+message.channel.type+")/"+message.author.username+" --> "+message.content;
         fs.appendFile(logPath, toFile+'\n', function (err) {
             if (err) {
                 console.log("Could not save log for: "+message.content);
             } else {				
                 console.log(toFile);
-            }
-        });
-    },
-
-    doInitChecks: function(message, cb){
-        writeToLog(message);
-            //check if user is banlist
-        getBaddieList(banlistPath, function checkBan(banList){//banList returns array of Ids
-            if(banList.includes(message.author.id)){
-                console.log("Banned");
-                cb("ban");
-            }
-            else{//user not on banlist
-                getBaddieList(blacklistPath, function checkBlack(blackList){
-                    if(blackList.includes(message.author.id)){
-                        cb("blacklist");
-                    }
-                    else{
-                        cb("clean");
-                    }
-                });
             }
         });
     }

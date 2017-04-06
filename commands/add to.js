@@ -38,7 +38,6 @@ exports.run = (client, message, params) => {
         });
     }
     else if(listPath !== ""){//there is a mention and there is a proper list to write to
-        //functions.writeBaddieList(message, listPath, message.mentions.users.first(), function finalCheck(status){});
         let badUser = message.mentions.users.first();
         if(json.indexOf(badUser.id) !== -1) return message.channel.sendMessage("User is already in the list, if this is unexpected, contact Daro.");
         json.push(badUser.id);

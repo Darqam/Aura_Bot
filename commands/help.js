@@ -7,6 +7,7 @@ exports.run = (client, message, params, perms) => {
     let funHelp = [];
     let sendOut = `= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n`;
     sendOut += client.commands.filter(function(c){//first only show the commands you are authorized to see
+      if(c.conf.enabled === false) return;
       if(c.conf.permLevel <= 2 && c.conf.type !== "fun"){//split these up to have a separate mod help menu below
         return c;
       }

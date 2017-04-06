@@ -1,4 +1,3 @@
-const fs = require('fs');
 const functions = require("../files/functions.js");
 const settings = require("../files/settings.json");
 
@@ -8,7 +7,7 @@ exports.run = (client, message, params) => {
     
     let badOutput = "Current list is:\n```\n";
 	let listPath = "";
-			    
+
     if(params[0].toUpperCase() === "BLACKLIST"){ listPath = blacklistPath; }
     else if(params[0].toUpperCase() === "BANLIST"){ listPath = banlistPath; }
     else{ return message.channel.sendMessage("Could not understand list type, please choose either \`blacklist\` or \`banlist\`.")}

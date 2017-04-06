@@ -1,4 +1,3 @@
-const fs = require('fs');
 const jsonData = require('../files/data.json');
 const functions = require("../files/functions.js");
 
