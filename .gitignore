@@ -2,3 +2,4 @@ node_modules
 commands/test.js
 bot_to_do.txt
 processes.json
+.eslintrc.json
