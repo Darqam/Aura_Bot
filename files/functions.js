@@ -27,6 +27,7 @@ var self = module.exports = {
                 console.log(err.message);
                 cb(false);
             }	
+
         });
     },
 
@@ -71,7 +72,7 @@ var self = module.exports = {
                         {
                             counterB += 1;
                             output += ach_arr[i]["name"]+"\n";
-                            
+
                             if(counterB == Object.keys(ach_arr).length)
                             {
                                 output += "```";
@@ -136,22 +137,32 @@ var self = module.exports = {
                                 output += "\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
                                 for(let i in ach_arr)
                                 {
-                                    counterB += 1;
-                                    
-                                    if(counterC == labels[currentFlag]){//if we've gone through as many entries as we expect per game type
-                                        counterC = 0;
-                                        sect_track += 1;
-                                        currentFlag = sections[sect_track];
-                                        output += "```\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
-                                    }
-                                    counterC += 1;
-                                    
-                                    output += ach_arr[i]["name"]+"\n";
-                                    
-                                    if(counterB == Object.keys(ach_arr).length)//if we have treated every singly id
+                                    let sections = Object.keys(labels);
+                                    currentFlag = "pve";
+                                    let counterB = 0;
+                                    let counterC = 0;
+                                    let sect_track = 0;
+                                    //output += "All Dailies:\n";
+                                    output += "\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
+                                    for(let i in ach_arr)
                                     {
-                                        output += "```";
-                                        cb(output);
+                                        counterB += 1;
+                                        
+                                        if(counterC == labels[currentFlag]){//if we've gone through as many entries as we expect per game type
+                                            counterC = 0;
+                                            sect_track += 1;
+                                            currentFlag = sections[sect_track];
+                                            output += "```\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
+                                        }
+                                        counterC += 1;
+                                        
+                                        output += ach_arr[i]["name"]+"\n";
+                                        
+                                        if(counterB == Object.keys(ach_arr).length)//if we have treated every singly id
+                                        {
+                                            output += "```";
+                                            cb(output);
+                                        }
                                     }
                                 }
                             });

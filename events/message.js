@@ -1,8 +1,5 @@
 const settings = require('../files/settings.json');
-const variables = require('../files/variables.json')
 const functions = require("../files/functions.js");
-
-var timedOut = variables.timeOut;
 
 module.exports = message => {
   let logPath = settings.botPath+"files/log.txt";
@@ -28,6 +25,7 @@ module.exports = message => {
       return;
     }
     else{//here check cmd.conf.type for "fun", if they are make the needed checks here
+      if(cmd.conf.enabled === false) return message.channel.sendMessage("If that was intended for me, I didn't understand it.");
       if(cmd.conf.type === "fun"){
         if(settings.funChannels.indexOf(message.channel.id) !== -1 || message.channel.type === "dm"){
           if(client.timedOut(message) === false || message.channel.type === "dm"){
@@ -37,7 +35,6 @@ module.exports = message => {
           else{ functions.writeToLog(message, "TimedOut: ", logPath); }
         }
       }
-        
       else{
         functions.writeToLog(message, "", logPath);
         cmd.run(client, message, params, perms);
