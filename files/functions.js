@@ -30,27 +30,6 @@ var self = module.exports = {
         });
     },
 
-    noDups: function(myArray, cb){
-        //let y = new Set(myArray); myArray.length ==y.size; //returns false for duplicate
-        for(let key in myArray)
-        {
-            for(let keyB in myArray)
-            {
-                if (key != keyB) 
-                {
-                    //console.log(myArray[key]["id"]+' -> '+myArray[keyB]["id"]);
-                    if (myArray[key]["id"] == myArray[keyB]["id"]) 
-                    {
-                        //console.log(myArray[key]["id"]+' -> '+myArray[keyB]["id"]);
-                        cb(false); // means there are duplicate values
-                        return;//break out now or get duplicate hits
-                    }
-                }
-            }
-        }
-        cb(true); // means there are no duplicate values.
-    },
-
     lookupDaily: function(message, data, type, cb){
         if(data[type].length == 0) return cb("```\nNo dailies found in this section\n```");//only look things up if there are actual entries
         
