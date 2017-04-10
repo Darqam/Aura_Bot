@@ -27,7 +27,6 @@ var self = module.exports = {
                 console.log(err.message);
                 cb(false);
             }	
-
         });
     },
 
@@ -53,128 +52,63 @@ var self = module.exports = {
     },
 
     lookupDaily: function(message, data, type, cb){
-        let counter = 0;
-        let ach_string = "";
-        let output = "```\n";
-        if(data[type].length > 0)//only look things up if there are actual entries
-        {
-            for(let key in data[type])
-            {
-                counter += 1;
-                ach_string += data[type][key]["id"].toString()+",";
-                if(counter == Object.keys(data[type]).length){//all ids are in an array
-                    let url = "https://api.guildwars2.com/v2/achievements?ids="+ach_string;
-                    self.isApiKill(url, function onComplete(ach_arr) {
-                        if(ach_arr === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+        if(data[type].length == 0) return cb("```\nNo dailies found in this section\n```");//only look things up if there are actual entries
+        
+        let ids = data[type].map(achiev => achiev["id"]);
+        let url = "https://api.guildwars2.com/v2/achievements?ids="+ids.join(",");
+        self.isApiKill(url, function onComplete(ach_arr) {
+            if(ach_arr === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
-                        let counterB = 0;
-                        for(let i in ach_arr)
-                        {
-                            counterB += 1;
-                            output += ach_arr[i]["name"]+"\n";
-
-                            if(counterB == Object.keys(ach_arr).length)
-                            {
-                                output += "```";
-                                cb(output);
-                            }
-                        }
-                    });
-                }
-            }
-        }
-        else
-        {
-            cb("```\nNo dailies found in this section\n```");
-        }
+            cb(`\`\`\`\n${ach_arr.map(cheevo => cheevo["name"]).join(`\n`)}\`\`\``);
+        });
     },
 
     lookupAllDaily: function(message, data, cb){
+        if(Object.keys(data).length == 0) return cb("```\nNo dailies found in this section\n```");
+        
+        let ids = [];
+        let tracker = [];
+        let names = [];
         let counter = 0;
-        let counterA = 0;
-        let labels = [];
-        let ach_string = "";
-        let output = "";
-        let currentFlag = "";
-        
-        
-        if(Object.keys(data).length > 0)//only look things up if there are actual entries
-        {
-            for(let keyA in data)
-            {
-                var uniqueness = true;
-                counterA += 1;
-                counter = 0;
-                
-                labels[keyA] = data[keyA].length;//should check here is array has duplicate, if it does, --
-                
-                
-                self.noDups(data[keyA], function confirmSize(uniqueness){
-                    if(uniqueness === false){//duplicate acheivs found, reduce one to length since dup achievs only shown as 1
-                        labels[keyA] -= 1;
-                    }
-
-                    if(data[keyA].length == 0)//super hacky way of skipping empty categories (special/festival)
-                    {
-                        data[keyA][0] = {"id": 0};
-                    }
-                    for(let key in data[keyA])
-                    {
-                        counter += 1;
-                        ach_string += data[keyA][key]["id"].toString()+",";
-
-                        if((counter == Object.keys(data[keyA]).length) && counterA == Object.keys(data).length){//all ids are in an array
-                            let url = "https://api.guildwars2.com/v2/achievements?ids="+ach_string;
-                            self.isApiKill(url, function onComplete(ach_arr) {
-                                if(ach_arr === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
-
-                                let sections = Object.keys(labels);
-                                currentFlag = "pve";
-                                let counterB = 0;
-                                let counterC = 0;
-                                let sect_track = 0;
-                                //output += "All Dailies:\n";
-                                output += "\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
-                                for(let i in ach_arr)
-                                {
-                                    let sections = Object.keys(labels);
-                                    currentFlag = "pve";
-                                    let counterB = 0;
-                                    let counterC = 0;
-                                    let sect_track = 0;
-                                    //output += "All Dailies:\n";
-                                    output += "\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
-                                    for(let i in ach_arr)
-                                    {
-                                        counterB += 1;
-                                        
-                                        if(counterC == labels[currentFlag]){//if we've gone through as many entries as we expect per game type
-                                            counterC = 0;
-                                            sect_track += 1;
-                                            currentFlag = sections[sect_track];
-                                            output += "```\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
-                                        }
-                                        counterC += 1;
-                                        
-                                        output += ach_arr[i]["name"]+"\n";
-                                        
-                                        if(counterB == Object.keys(ach_arr).length)//if we have treated every singly id
-                                        {
-                                            output += "```";
-                                            cb(output);
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                    }
+        for(let type in data){
+            if(data[type].length > 0){
+                let typeIds = data[type].map( x => x.id);
+                let unique = typeIds.filter(function(elem, index, self) {
+                    return index == self.indexOf(elem);
                 });
+                tracker[counter] = unique.length;//set how many unique achievements
+                names[counter] = type;//set section names (no hardcode in case of possible future change)
+                counter += 1;
+                ids = ids.concat(unique);
             }
         }
-        else
-        {
-            cb("```\nNo dailies found in this section\n```");
-        }
+        // at this point tracker is an array of which each entry represents the section size
+        // and ids hols all the ids in one array (without duplicates)
+
+        let url = "https://api.guildwars2.com/v2/achievements?ids="+ids.join(",");
+        self.isApiKill(url, function onComplete(ach_arr) {
+            if(ach_arr === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+
+            //console.log(ach_arr);
+            let index = 0;
+            let count = 0;
+            let output = `${names[index].toUpperCase()} Dailies: \n\n\`\`\``;
+
+            for(let i in ach_arr){
+                output += `${ach_arr[i].name}\n`;
+
+                count += 1;
+                if(count === tracker[index]){
+                    count = 0;
+                    index += 1;
+                    output += `\`\`\``;
+                    if(tracker[index]){//if we entered a new valid category
+                        output += `\n\n${names[index].toUpperCase()} Dailies: \n\n\`\`\``;
+                    }
+                }
+            }
+            cb(output);
+        });
     },
 
     getUserKey: function(message, user, cb){
