@@ -1,16 +1,11 @@
-const functions = require('../files/functions.js');
+const snekfetch = require('snekfetch');
 
 exports.run = (client, message) => {
-    let url = "https://api.guildwars2.com/v2/quaggans";
-    functions.isApiKill(url, function afterUrl(data){
-        if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+    snekfetch.get("https://api.guildwars2.com/v2/quaggans").then( r => {
+        if (r.status.statusCode < 200 || r.status.statusCode > 299 || r.ok == false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
-        let quagganArray = data;
-        (function (quagganArray) {
-            let keys = Object.keys(quagganArray);
-            let result = quagganArray[keys[ keys.length * Math.random() << 0]];
-            message.channel.sendMessage("Coo!\nhttps://static.staticwars.com/quaggans/"+result+".jpg");
-        })(quagganArray); 
+        message.channel.sendMessage("Coo!\nhttps://static.staticwars.com/quaggans/"+r.body[Math.floor(Math.random() * r.body.length)]+".jpg");
+
     });
 };
 exports.conf = {

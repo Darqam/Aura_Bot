@@ -1,8 +1,10 @@
-const https = require('https');
+const snekfetch = require('snekfetch');
 const request = require('request');
 const Promise = require('bluebird');
 const Feedparser = require('feedparser');
 const fs = require('fs');
+const moment = require('moment');
+const chalk = require('chalk');
 
 
 const forumRss = 'https://forum-en.guildwars2.com/forum/info/updates.rss';
@@ -10,43 +12,27 @@ let api_file = "./files/api_keys.json";
 
 var self = module.exports = {
     isApiKill: function(url, cb){
-        https.get(url, function (response) {
-        // data is streamed in chunks from the server
-        // so we have to handle the "data" event 
-            var buffer = "", 
-                data,
-                route;
+        snekfetch.get(url).then( r => {            
+            if (r.status.statusCode < 200 || r.status.statusCode > 299 || r.ok == false) return console.log(r.statusText);
 
-            response.on("data", function (chunk) {
-                buffer += chunk;
-            }); 
+            try
+            {
+                if(r.body['text'] === "no such id"){cb(false);console.log("Bad API call.");}
+                else if(r.body.error === "not found"){cb(false);console.log("hit error");}
+                else if(r.body){cb(r.body);}
+                
+            }
+            catch(err)
+            {
+                console.log(err.message);
+                cb(false);
+            }	
 
-            response.on("end", function (err) {
-                // finished transferring data
-                // dump the raw data
-                //console.log(buffer);
-                //console.log("\n");
-                if(err) return console.log(err.message);
-
-                data = JSON.parse(buffer);
-                //console.log(data)
-                try
-                {
-                    if(data['text'] === "no such id"){cb(false);console.log("Bad API call.");}
-                    else if(data.error === "not found"){cb(false);console.log("hit error");}
-                    else if(data){cb(data);}
-                    
-                }
-                catch(err)
-                {
-                    console.log(err.message);
-                    cb(false);
-                }	
-            });
         });
     },
 
     noDups: function(myArray, cb){
+        //let y = new Set(myArray); myArray.length ==y.size; //returns false for duplicate
         for(let key in myArray)
         {
             for(let keyB in myArray)
@@ -79,23 +65,18 @@ var self = module.exports = {
                 if(counter == Object.keys(data[type]).length){//all ids are in an array
                     let url = "https://api.guildwars2.com/v2/achievements?ids="+ach_string;
                     self.isApiKill(url, function onComplete(ach_arr) {
-                        if(ach_arr === false)//if something went booboo
+                        if(ach_arr === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+
+                        let counterB = 0;
+                        for(let i in ach_arr)
                         {
-                            message.channel.sendMessage("Something went bad with the API call, probably a bot or API issue. The queried url was: <"+url+"> . If this url is incorrect or active, contact Daroem, he messed up.");
-                        }
-                        else
-                        {
-                            let counterB = 0;
-                            for(let i in ach_arr)
+                            counterB += 1;
+                            output += ach_arr[i]["name"]+"\n";
+
+                            if(counterB == Object.keys(ach_arr).length)
                             {
-                                counterB += 1;
-                                output += ach_arr[i]["name"]+"\n";
-                                
-                                if(counterB == Object.keys(ach_arr).length)
-                                {
-                                    output += "```";
-                                    cb(output);
-                                }
+                                output += "```";
+                                cb(output);
                             }
                         }
                     });
@@ -127,6 +108,7 @@ var self = module.exports = {
                 
                 labels[keyA] = data[keyA].length;//should check here is array has duplicate, if it does, --
                 
+                
                 self.noDups(data[keyA], function confirmSize(uniqueness){
                     if(uniqueness === false){//duplicate acheivs found, reduce one to length since dup achievs only shown as 1
                         labels[keyA] -= 1;
@@ -144,11 +126,16 @@ var self = module.exports = {
                         if((counter == Object.keys(data[keyA]).length) && counterA == Object.keys(data).length){//all ids are in an array
                             let url = "https://api.guildwars2.com/v2/achievements?ids="+ach_string;
                             self.isApiKill(url, function onComplete(ach_arr) {
-                                if(ach_arr === false)//if something went booboo
-                                {
-                                    message.channel.sendMessage("Something went bad with the API call, probably a bot or API issue. The queried url was: <"+url+"> . If this url is incorrect or active, contact Daroem, he messed up.");
-                                }
-                                else
+                                if(ach_arr === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+
+                                let sections = Object.keys(labels);
+                                currentFlag = "pve";
+                                let counterB = 0;
+                                let counterC = 0;
+                                let sect_track = 0;
+                                //output += "All Dailies:\n";
+                                output += "\n\n"+currentFlag.toUpperCase()+" Dailies: \n\n```";
+                                for(let i in ach_arr)
                                 {
                                     let sections = Object.keys(labels);
                                     currentFlag = "pve";
@@ -289,19 +276,14 @@ var self = module.exports = {
     },
 
     writeToLog: function(message, pass, logPath){
-        let currentdate = new Date(); 
-        let datetime = currentdate.getDate() + "/"
-                    + (currentdate.getMonth()+1)  + "/" 
-                    + currentdate.getFullYear() + " @ "  
-                    + currentdate.getHours() + ":"  
-                    + currentdate.getMinutes() + ":" 
-                    + currentdate.getSeconds();
-        let toFile = pass+datetime+" : "+message.channel.name+"("+message.channel.type+")/"+message.author.username+" --> "+message.content;
-        fs.appendFile(logPath, toFile+'\n', function (err) {
+        let time = `[${moment().format('YYYY-MM-DD HH:mm:ss')}]: `;
+        let details = `${message.channel.name} (${message.channel.type})/${message.author.username} --> ${message.content}`;
+
+        fs.appendFile(logPath, `${time}${pass}${details}\n`, function (err) {
             if (err) {
                 console.log("Could not save log for: "+message.content);
-            } else {				
-                console.log(toFile);
+            } else {
+                console.log(`${chalk.bold.cyan(time)}${chalk.grey(pass)}${chalk.green(details)}`);			
             }
         });
     }
