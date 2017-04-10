@@ -1,11 +1,11 @@
 const randomPuppy = require('random-puppy');
 
-exports.run = (client, message, params, perms) => {
+exports.run = (client, message) => {
 
 randomPuppy()
     .then(url => {
         message.channel.sendMessage(url);
-    })
+    });
 };
 
 exports.conf = {

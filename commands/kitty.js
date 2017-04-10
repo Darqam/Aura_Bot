@@ -1,12 +1,12 @@
-const functions = require('../files/functions.js');
-const request = require('request');
+const snekfetch = require('snekfetch');
 
-exports.run = (client, message, params, perms) => {
+exports.run = (client, message) => {
 
-request("http://random.cat/meow", function (error, response, body) {
-          body = JSON.parse(body)["file"];
-          message.channel.sendMessage(body)
-        });
+  snekfetch.get("http://random.cat/meow").then( r => {
+    //console.log(r);
+    if (r.status.statusCode < 200 || r.status.statusCode > 299 || r.ok == false) return message.channel.sendMessage("Something messed up");
+    message.channel.sendMessage(r.body.file);
+  });
 };
 
 exports.conf = {

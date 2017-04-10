@@ -1,5 +1,5 @@
 exports.run = (client, message, params) => {
-		message.channel.sendMessage(message.guild.emojis.find('name', 'rip').toString()).then(() => { process.exit() });//makes use of this bot running on pm2
+		message.channel.sendMessage(message.guild.emojis.find('name', 'rip').toString()).then(() => { process.exit(); });//makes use of this bot running on pm2
 };
 
 exports.conf = {

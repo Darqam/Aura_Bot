@@ -12,7 +12,7 @@ exports.run = (client, message, params) => {
 
     if(listChoice.toUpperCase() === "BLACKLIST"){ listPath = blacklistPath; }
     else if(listChoice.toUpperCase() === "BANLIST"){ listPath = banlistPath; }
-    else{ return message.channel.sendMessage("Could not understand list type, please choose either \`blacklist\` or \`banlist\`.")}
+    else{ return message.channel.sendMessage("Could not understand list type, please choose either \`blacklist\` or \`banlist\`.");}
 
     let json = require(listPath);//get the array of baddies
 
@@ -21,7 +21,7 @@ exports.run = (client, message, params) => {
             if(badUser === false) return message.channel.sendMessage("Could not find user, please type their display name exactly as seen on discord.");
             if(json.indexOf(badUser.id) === -1) return message.channel.sendMessage("User was not found in the list, constact Daro is this is unexpected.");
             
-            json = json.filter(function(e) { return e !== badUser.id })
+            json = json.filter(function(e) { return e !== badUser.id; });
             fs.writeFile(listPath, JSON.stringify(json, null, 4), function (err){
                 if(!err) return message.channel.sendMessage("User has been removed from the list.");
                 
@@ -32,7 +32,7 @@ exports.run = (client, message, params) => {
     }
     else if(listPath !== ""){//there is a mention and there is a proper list to write to
         let badUser = message.mentions.users.first();
-        json  = json.filter(function(e) { return e !== badUser.id })
+        json  = json.filter(function(e) { return e !== badUser.id; });
         fs.writeFile(listPath, JSON.stringify(json, null, 4), function (err){
             if(!err) return message.channel.sendMessage("User has been removed from the list.");
             

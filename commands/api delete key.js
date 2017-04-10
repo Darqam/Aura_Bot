@@ -1,16 +1,10 @@
 const fs = require('fs');
-const functions = require("../files/functions.js");
 
 exports.run = (client, message, params) => {
     let api_file = "./files/api_keys.json";
-    let flag = false;
-    let id_check = "";
-    let length = 0;
-    let content = [];
     
     fs.readFile(api_file, 'utf8', function read(err, data){
         if (err){
-            throw err;
             return console.log("Had issue reading file. "+err.message);
         }
 
