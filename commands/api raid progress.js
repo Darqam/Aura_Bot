@@ -78,7 +78,7 @@ exports.run = (client, message, params) => {
                     
                     let output = "**Boss Kills**\n```\n"+SV_out+"\n"+SP_out+"\n"+SotF_out+"\n"+BotP_out+"```\n";
                     
-                    output += "**Challenge Motes/Modes**\n```\n"+"\n"+SPcm_out+"\n"+SotFcm_out+"\n"+BotPcm_out+"\n```"
+                    output += "**Challenge Motes/Modes**\n```\n"+"\n"+SPcm_out+"\n"+SotFcm_out+"\n"+BotPcm_out+"\n```";
                     
                     output = output.replace(/,(\s*,)+/, ",");// removes instances of [, ,]
                     output = output.replace(/,\s\s+/,"");//removes instances where comma is trailing at the end

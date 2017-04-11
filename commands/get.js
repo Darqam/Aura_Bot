@@ -20,15 +20,14 @@ exports.run = (client, message, params) => {
             functions.getUserById(badId, message, function haveId(badUser){//grab the user id from the displayname
                 if(badUser === false){ badOutput += "Could not find a User associated with Id: "+badId+'\n'; }
                 else{
-                    badOutput += badUser.displayName+'\n'
+                    badOutput += badUser.displayName+'\n';
                 }
             });
         }
-        if(i == json.length-1){
-            badOutput += "```";
-            message.channel.sendMessage(badOutput);
-        }
     }
+
+    badOutput += "```";
+    message.channel.sendMessage(badOutput);
     
     delete require.cache[require.resolve(listPath)];//removes cache for json file containing baddies
     

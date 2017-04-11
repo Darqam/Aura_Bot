@@ -1,7 +1,7 @@
 const settings = require('../files/settings.json');
 const functions = require("../files/functions.js");
 
-function add(a, b) {
+function add(a, b) {//shhhh, don't question it
     return a + b;
 }
 

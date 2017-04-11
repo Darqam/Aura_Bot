@@ -1,4 +1,4 @@
-exports.run = (client, message, params, perms) => {
+exports.run = (client, message, params) => {
     if(message.channel.type === "dm") return message.channel.sendMessage("Can't set game in DMs.");
     if(!params[0]){ 
         client.user.setGame(null); 

@@ -1,4 +1,4 @@
-exports.run = (client, message, params, perms) => {
+exports.run = (client, message) => {
     message.channel.sendMessage("HYPE!!!!!!\nhttp://i.imgur.com/1d58kOi.jpg");
 };
 exports.conf = {

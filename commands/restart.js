@@ -1,11 +1,11 @@
-exports.run = (client, message, params) => {
+exports.run = (client, message) => {
 		message.channel.sendMessage(message.guild.emojis.find('name', 'rip').toString()).then(() => { process.exit(); });//makes use of this bot running on pm2
 };
 
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [],
+  aliases: ['shutdown', 'reboot'],
   permLevel: 1
 };
 

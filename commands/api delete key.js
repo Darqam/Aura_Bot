@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-exports.run = (client, message, params) => {
+exports.run = (client, message) => {
     let api_file = "./files/api_keys.json";
     
     fs.readFile(api_file, 'utf8', function read(err, data){

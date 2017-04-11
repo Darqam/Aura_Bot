@@ -1,7 +1,7 @@
 const settings = require('../files/settings.json');
 const functions = require("../files/functions.js");
 
-exports.run = function(client, message, args){
+exports.run = function(client, message){
     let url = "https://api.guildwars2.com/v2/guild/"+settings.guildID+settings.userToken;
 
     functions.isApiKill(url, function getMOTD(data) {
