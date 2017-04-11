@@ -1,6 +1,6 @@
 const fs = require('fs');
 const settings = require('../files/settings.json');
-const functions = require("../files/functions.js");
+const snekfetch = require('snekfetch');
 
 exports.run = (client, message, params) => {
     let details = "";
@@ -21,21 +21,22 @@ exports.run = (client, message, params) => {
         let content = JSON.parse(data);
         if(content[message.author.id]) return message.channel.sendMessage("Your key is already set. If you want to overwrite, please use the command **"+settings.prefix+"api overwrite key, ApiKeyHere**");
 
-        let key_url = "https://api.guildwars2.com/v2/account?access_token="+details;
-        functions.isApiKill(key_url, function onComplete(check){
-            if((check != false) && (check["text"] != "invalid key"))//if the key actually works
-            {
-                content[message.author.id] = details;
-                fs.writeFile(api_file, JSON.stringify(content, null, 4), function (err){
-                    if (err) {
-                        message.channel.sendMessage("There was an issue in saving your API key.");
-                        return console.log("Had issue writting file. "+err.message);
-                    }
-                    
-                    message.channel.sendMessage("Your API key has been saved to your unique user ID.");
-                });
-            }
-            else{message.channel.sendMessage("The API key was not valid, or there was an issue on the API end. Nothing saved"); }
+        let key_url = "https://api.guildwars2.com/v2/tokeninfo?access_token="+details;
+        snekfetch.get(key_url).then( r => {
+            if (r.status.statusCode < 200 || r.status.statusCode > 299 || r.ok == false) return message.channel.sendMessage("The API key was not valid, or there was an issue on the API end. Nothing saved.");
+            
+            //now check if progression is enabled on this api key
+            if(!r.body.permissions.includes("progression")) return message.channel.sendMessage("The API key does not have the \`progression\` scope selected. This is needed in order to function. Nothing saved.");
+
+            content[message.author.id] = details;
+            fs.writeFile(api_file, JSON.stringify(content, null, 4), function (err){
+                if (err) {
+                    message.channel.sendMessage("There was an issue in saving your API key.");
+                    return console.log("Had issue writting file. "+err.message);
+                }
+                
+                message.channel.sendMessage("Your API key has been saved to your unique user ID.");
+            });
         });
     });
 };

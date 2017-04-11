@@ -93,7 +93,8 @@ var self = module.exports = {
     getUserKey: function(message, user, cb){
         fs.readFile(api_file, 'utf8', function read(err, data){
             if (err){
-                throw err;
+                console.log(err);
+                cb("");//code compliance
             }
             let content = JSON.parse(data);
             if(content[user.id]){//if there is an api key for this user
@@ -196,7 +197,7 @@ var self = module.exports = {
             if (err) {
                 console.log("Could not save log for: "+message.content);
             } else {
-                console.log(`${chalk.bold.cyan(time)}${chalk.grey(pass)}${chalk.green(details)}`);			
+                console.log(`${chalk.bold.cyan(time)}${chalk.grey(pass)}${chalk.magenta(`${message.channel.name} (${message.channel.type})/${message.author.username}`)} --> ${chalk.green(message.content)}`);//why the hell do I do this....?
             }
         });
     }
