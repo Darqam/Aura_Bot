@@ -14,7 +14,7 @@ exports.run = (client, message, params) => {
 
     if(listChoice.toUpperCase() === "BLACKLIST"){ listPath = blacklistPath; }
     else if(listChoice.toUpperCase() === "BANLIST"){ listPath = banlistPath; }
-    else{ return message.channel.sendMessage("Could not understand list type, please choose either \`blacklist\` or \`banlist\`.")}
+    else{ return message.channel.sendMessage("Could not understand list type, please choose either \`blacklist\` or \`banlist\`.");}
     
     let json = require(listPath);//get the array of baddies
     if (message.mentions.users.size < 1){//If there is no mention

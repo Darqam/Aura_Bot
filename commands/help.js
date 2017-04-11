@@ -24,7 +24,7 @@ exports.run = (client, message, params, perms) => {
     
     if(funHelp.length > 0){//only output this snippet if user has rights to use these commands
       sendOut += `\n\n== Playground Commands ==\n\n`;
-      sendOut += funHelp.map(function(obj) { return `${settings.prefix}${obj.help.name}`}).join(',');
+      sendOut += funHelp.map(function(obj) { return `${settings.prefix}${obj.help.name}`;}).join(',');
     }
     if(modHelp.length > 0){//only output this snippet if user has mod rights
       sendOut += `\n\n== Mod Commands ==\n\n`;
