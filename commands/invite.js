@@ -13,9 +13,7 @@ exports.run = (client, message, params) => {
         });
 
     }).catch(console.err);
-
-
-}
+};
 
 exports.conf = {
   enabled: true,

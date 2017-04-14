@@ -37,7 +37,7 @@ exports.run = (client, message) => {
                 url = "https://api.guildwars2.com/v2/worlds/"+world_id;
                 functions.isApiKill(url, function toFinish(dataB){
                     try{
-                        server = dataB["name"]
+                        server = dataB["name"];
                     }
                     catch (err){
                         console.log(err);

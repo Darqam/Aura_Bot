@@ -30,7 +30,8 @@ exports.run = (client, message, params, perms) => {
       sendOut += `\n\n== Mod Commands ==\n\n`;
       sendOut += modHelp.map(function(obj) { return `${settings.prefix}${obj.help.name}${' '.repeat(longest - obj.help.name.length)} :: ${obj.help.description}`; }).join('\n');//then map the commands to a usable array format and join them into a string
     }
-    message.channel.sendCode('asciidoc',sendOut);
+    message.author.sendCode('asciidoc',sendOut);
+    message.reply("Sent you a DM with information.");
     
 
   } else {

@@ -1,19 +1,229 @@
 {
     "bosses" : {
-    "vale_guardian" : { "name" : "Vale Guardian", "order" : 0 },
-    "spirit_woods" : { "name" : "Spirit Woods", "order" : 1 },
-    "gorseval" : { "name" : "Gorseval the Multifarious", "order" : 2 },
-    "sabetha" : { "name" : "Sabetha the Saboteur", "order" : 3 },
-    "slothasor" :  { "name" : "Slothasor", "order" : 4 },
-    "bandit_trio" :  { "name" : "Bandit Trio", "order" : 5 },
-    "matthias" : { "name" : "Matthias Gabrel", "order" : 6 },
-    "escort" :  { "name" : "Siege the Stronghold", "order" : 7 },
-    "keep_construct" :  { "name" : "Keep Construct", "order" : 8 },
-    "twisted_castle" :  { "name" : "Twisted Castle", "order" : 9 },
-    "xera" : { "name" : "Xera", "order" : 10 },
-    "cairn" :  { "name" : "Cairn the Indomitable", "order" : 11 },
-    "mursaat_overseer" :  { "name" : "Mursaat Overseer", "order" : 12 },
-    "samarog" :  { "name" : "Samarog", "order" : 13 },
-    "deimos" :  { "name" : "Deimos", "order" : 14 }
-    }
+		"vale_guardian" : { "name" : "Vale Guardian", "order" : 0 },
+		"spirit_woods" : { "name" : "Spirit Woods", "order" : 1 },
+		"gorseval" : { "name" : "Gorseval the Multifarious", "order" : 2 },
+		"sabetha" : { "name" : "Sabetha the Saboteur", "order" : 3 },
+		"slothasor" :  { "name" : "Slothasor", "order" : 4 },
+		"bandit_trio" :  { "name" : "Bandit Trio", "order" : 5 },
+		"matthias" : { "name" : "Matthias Gabrel", "order" : 6 },
+		"escort" :  { "name" : "Siege the Stronghold", "order" : 7 },
+		"keep_construct" :  { "name" : "Keep Construct", "order" : 8 },
+		"twisted_castle" :  { "name" : "Twisted Castle", "order" : 9 },
+		"xera" : { "name" : "Xera", "order" : 10 },
+		"cairn" :  { "name" : "Cairn the Indomitable", "order" : 11 },
+		"mursaat_overseer" : { "name" : "Deimos", "order" : 14 }
+    },
+    "currencies": {
+		"1": {
+			"id": 1,
+			"name": "Coin",
+			"description": "The primary currency of Tyria. Spent at vendors throughout the world.",
+			"order": 110,
+			"icon": "https://render.guildwars2.com/file/98457F504BA2FAC8457F532C4B30EDC23929ACF9/619316.png"
+		},
+		"2": {
+			"id": 2,
+			"name": "Karma",
+			"description": "Earned through various activities. Spent at vendors throughout the world.",
+			"order": 120,
+			"icon": "https://render.guildwars2.com/file/94953FA23D3E0D23559624015DFEA4CFAA07F0E5/155026.png"
+		},
+		"3": {
+			"id": 3,
+			"name": "Laurel",
+			"description": "Earned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards.",
+			"order": 140,
+			"icon": "https://render.guildwars2.com/file/A1BD345AD9192C3A585BE2F6CB0617C5A797A1E2/619317.png"
+		},
+		"4": {
+			"id": 4,
+			"name": "Gem",
+			"description": "Purchased and spent via the Black Lion Trading Company.",
+			"order": 100,
+			"icon": "https://render.guildwars2.com/file/220061640ECA41C0577758030357221B4ECCE62C/502065.png"
+		},
+		"5": {
+			"id": 5,
+			"name": "Ascalonian Tear",
+			"description": "Earned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons.",
+			"order": 710,
+			"icon": "https://render.guildwars2.com/file/2AA9C0B030BE152B915E0174D7F0495FDA711C54/619318.png"
+		},
+		"6": {
+			"id": 6,
+			"name": "Shard of Zhaitan",
+			"description": "Earned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons.",
+			"order": 780,
+			"icon": "https://render.guildwars2.com/file/06083C4F7321512918E23D57B999F04E94C8D9A3/619319.png"
+		},
+		"7": {
+			"id": 7,
+			"name": "Fractal Relic",
+			"description": "Earned and spent in Fractals of the Mists. Also used as a crafting ingredient.",
+			"order": 170,
+			"icon": "https://render.guildwars2.com/file/0204DAD0D40674035F9F5F5270043C3207EEA7E8/619320.png"
+		},
+		"9": {
+			"id": 9,
+			"name": "Seal of Beetletun",
+			"description": "Earned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons.",
+			"order": 720,
+			"icon": "https://render.guildwars2.com/file/C97B0607A6DB1FA1469D1DBBF2F107A057F8A313/619322.png"
+		},
+		"10": {
+			"id": 10,
+			"name": "Manifesto of the Moletariate",
+			"description": "Earned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons.",
+			"order": 740,
+			"icon": "https://render.guildwars2.com/file/B83A4ED528FC237D4D1862CDD0250B773EAB36AA/619323.png"
+		},
+		"11": {
+			"id": 11,
+			"name": "Deadly Bloom",
+			"description": "Earned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons.",
+			"order": 730,
+			"icon": "https://render.guildwars2.com/file/F6F4F39212AF3324223D73BAA807026BD863997C/619324.png"
+		},
+		"12": {
+			"id": 12,
+			"name": "Symbol of Koda",
+			"description": "Earned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons.",
+			"order": 760,
+			"icon": "https://render.guildwars2.com/file/2B9E2BC9D5D080C54C17E27CECACEFFC0D64EE22/619325.png"
+		},
+		"13": {
+			"id": 13,
+			"name": "Flame Legion Charr Carving",
+			"description": "Earned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons.",
+			"order": 750,
+			"icon": "https://render.guildwars2.com/file/310CA245DBF61A54BD0C5D5361E26F0821FCAAFD/619326.png"
+		},
+		"14": {
+			"id": 14,
+			"name": "Knowledge Crystal",
+			"description": "Earned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons.",
+			"order": 770,
+			"icon": "https://render.guildwars2.com/file/37CCE672250A3170B71760949C4C9C9B186517B1/619327.png"
+		},
+		"15": {
+			"id": 15,
+			"name": "Badge of Honor",
+			"description": "Earned and spent in WvW to purchase various items.",
+			"order": 160,
+			"icon": "https://render.guildwars2.com/file/AC3178E7BD066BC597F9D4247848E6033A047EDE/699004.png"
+		},
+		"16": {
+			"id": 16,
+			"name": "Guild Commendation",
+			"description": "Earned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards.",
+			"order": 180,
+			"icon": "https://render.guildwars2.com/file/1DB12CF3E9D8D3CF77DA805B2008D417EA32C172/699005.png"
+		},
+		"18": {
+			"id": 18,
+			"name": "Transmutation Charge",
+			"description": "Purchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance.",
+			"order": 150,
+			"icon": "https://render.guildwars2.com/file/66A42690C2EA05235C4090372B975117F60EE7E3/779571.png"
+		},
+		"19": {
+			"id": 19,
+			"name": "Airship Part",
+			"description": "Earned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods.",
+			"order": 201,
+			"icon": "https://render.guildwars2.com/file/07EC38BCBE979B7F4557057F51785F0930075F35/1029833.png"
+		},
+		"20": {
+			"id": 20,
+			"name": "Ley Line Crystal",
+			"description": "Earned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods.",
+			"order": 203,
+			"icon": "https://render.guildwars2.com/file/DD02946A3AB4076C500836533F67303EE464A6AC/1206837.png"
+		},
+		"22": {
+			"id": 22,
+			"name": "Lump of Aurillium",
+			"description": "Earned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods.",
+			"order": 202,
+			"icon": "https://render.guildwars2.com/file/5D74D6D3D8179FC49D572975CC5E0CC701025508/1206836.png"
+		},
+		"23": {
+			"id": 23,
+			"name": "Spirit Shard",
+			"description": "Used by Miyani to maintain the Mystic Forge.",
+			"order": 130,
+			"icon": "https://render.guildwars2.com/file/0AD608DE7FDEE0B909905C0AF9401321CF65CD94/1010701.png"
+		},
+		"24": {
+			"id": 24,
+			"name": "Pristine Fractal Relic",
+			"description": "Earned and spent in the Fractals of the Mists. Used to purchase ascended rings.",
+			"order": 175,
+			"icon": "https://render.guildwars2.com/file/77B0F842ED036D71E46B80570D6CFE25CB4C0677/619321.png"
+		},
+		"25": {
+			"id": 25,
+			"name": "Geode",
+			"description": "Earned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons.",
+			"order": 190,
+			"icon": "https://render.guildwars2.com/file/11C6D8AB5FD04866BF3D751771F90C392739B5DF/1010699.png"
+		},
+		"26": {
+			"id": 26,
+			"name": "WvW Tournament Claim Ticket",
+			"description": "Earned by participating in WvW tournaments. Traded for various rewards at a WvW Battle Historian.",
+			"order": 300,
+			"icon": "https://render.guildwars2.com/file/0F911F55FF800FC0589970FF9137BF050699392F/1010702.png"
+		},
+		"27": {
+			"id": 27,
+			"name": "Bandit Crest",
+			"description": "Earned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear.",
+			"order": 200,
+			"icon": "https://render.guildwars2.com/file/B8E963AF6D4C66237D44194A6570A1492D1F5EE4/1010697.png"
+		},
+		"28": {
+			"id": 28,
+			"name": "Magnetite Shard",
+			"description": "Earned from bosses and events inside raids.",
+			"order": 205,
+			"icon": "https://render.guildwars2.com/file/95F8F70D97186780CE45B54600B90BE356D8EA7C/1302741.png"
+		},
+		"29": {
+			"id": 29,
+			"name": "Provisioner Token",
+			"description": "Earned by helping Faction Provisioners in the Heart of Maguuma.",
+			"order": 350,
+			"icon": "https://render.guildwars2.com/file/5CF6FC0B62554EBECAC6752AAFA2B8D80F726077/1302745.png"
+		},
+		"30": {
+			"id": 30,
+			"name": "PvP League Ticket",
+			"description": "Earned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor.",
+			"order": 299,
+			"icon": "https://render.guildwars2.com/file/DB05F5F20B94A3D12AF11041F60E194D66584957/1313248.png"
+		},
+		"31": {
+			"id": 31,
+			"name": "Proof of Heroics",
+			"description": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
+			"order": 310,
+			"icon": "https://render.guildwars2.com/file/0D971EF54A6FA5146AC9F60A0702DD640CBB8011/1207142.png"
+		},
+		"32": {
+			"id": 32,
+			"name": "Unbound Magic",
+			"description": "Earned in various ways at locations heavily affected by the explosive release of magic into Tyria. Spent at vendors in those locales to purchase unlocks and rewards.",
+			"order": 208,
+			"icon": "https://render.guildwars2.com/file/55CBF5154BC749F0BE7B01F9C75C04F2CD4BC561/1465799.png"
+		},
+		"33": {
+			"id": 33,
+			"name": "Ascended Shards of Glory",
+			"description": "Earned from PvP League Division Chests.",
+			"order": 298,
+			"icon": "https://render.guildwars2.com/file/1AAD230BF65AE92C000E0C18D26D404022092C35/1614710.png"
+		}
+	}
 }
