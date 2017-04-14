@@ -20,7 +20,7 @@ function sendEmbed(message, data, cap, server, cmdr, type){
 }
 
 
-exports.run = (client, message, params) => {
+exports.run = (client, message) => {
     functions.getUserKey(message, message.author, function onComplete(user_key){
         if(user_key != ""){//only do work if user key is found. error handling already done in function
             let url = "https://api.guildwars2.com/v2/account?access_token="+user_key;
@@ -73,5 +73,5 @@ exports.conf = {
 exports.help = {
   name: 'api basic',
   description: 'Returns basic information on your account',
-  usage: 'api basic. Will return account name, playtime, fotm&WvW rank, commander tag presence, current daily+monthly AP, which version of the game is owned, and the server it is on.'
+  usage: 'api basic\nExtra Info: Will return account name, playtime, fotm&WvW rank, commander tag presence, current daily+monthly AP, which version of the game is owned, and the server it is on.'
 };

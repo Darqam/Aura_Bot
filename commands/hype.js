@@ -11,6 +11,6 @@ exports.conf = {
 
 exports.help = {
   name: 'hype',
-  description: 'Displays hype',
+  description: 'Displays hype.',
   usage: 'hype'
 };

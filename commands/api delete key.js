@@ -36,5 +36,5 @@ exports.conf = {
 exports.help = {
   name: 'api delete key',
   description: 'Removes your API key to the bot\'s database',
-  usage: 'api delete key, [yourApiKey]'
+  usage: 'api delete key, <yourApiKey>'
 };

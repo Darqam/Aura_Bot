@@ -23,6 +23,6 @@ exports.conf = {
 
 exports.help = {
   name: 'about',
-  description: 'Adds a user to the selected list.',
-  usage: 'about,\nReturns basic information about the bot and the server it is currently on.'
+  description: 'Returns basic information about the bot and the server it is currently on.',
+  usage: 'about'
 };

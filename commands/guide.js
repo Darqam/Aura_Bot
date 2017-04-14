@@ -23,6 +23,6 @@ exports.conf = {
 
 exports.help = {
   name: 'guide',
-  description: 'Shows links to raid guides.',
-  usage: 'guide, displays guides for the first 4 released raid wings.'
+  description: 'Displays guides for the first 4 released raid wings.',
+  usage: 'guide'
 };

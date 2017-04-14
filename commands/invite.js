@@ -27,5 +27,5 @@ exports.conf = {
 exports.help = {
   name: 'invite',
   description: 'Creates an invite to your current voice channel.',
-  usage: 'invite, <time>. \n<time> is the amount of time the invite will last, defaults to 3 hours. Set time to 0 to have a permanent invite. Must be only a number. The invite will default to inviting to #general if the user calling the command is in no voice channel.'
+  usage: 'invite, <time>. \nExtra Info: <time> is the amount of time the invite will last, defaults to 3 hours. Set time to 0 to have a permanent invite. Must be only a number. The invite will default to inviting to #general if no VC is found.'
 };

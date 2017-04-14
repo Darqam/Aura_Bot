@@ -46,5 +46,5 @@ exports.conf = {
 exports.help = {
   name: 'api overwrite key',
   description: 'Overwrite your currently set API key.',
-  usage: 'api overwrite key, [yourApiKey]'
+  usage: 'api overwrite key, <yourApiKey>'
 };

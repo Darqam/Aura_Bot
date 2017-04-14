@@ -12,5 +12,5 @@ exports.conf = {
 exports.help = {
   name: 'restart',
   description: 'Restarts the bot.',
-  usage: 'restart. May take a few seconds to complete restart.'
+  usage: 'restart'
 };

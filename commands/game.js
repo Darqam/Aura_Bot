@@ -20,5 +20,5 @@ exports.conf = {
 exports.help = {
   name: 'game',
   description: 'Change the played game displayed for the bot.',
-  usage: 'game, gameNameHere. May take a minute to update. To remove displayed game, do not assign a game when calling the command.'
+  usage: 'game, gameNameHere\nExtra Info: May take a minute to update. To remove displayed game, do not assign a game when calling the command.'
 };

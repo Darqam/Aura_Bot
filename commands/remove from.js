@@ -53,6 +53,6 @@ exports.conf = {
 exports.help = {
   name: 'remove from',
   description: 'Removes a user to the selected list.',
-  usage: 'remove from, [blacklist/banlist], usernameHere. Either blacklist or banlist must be selected, the username is to be written as seen in discord chat or as an \'@\' mention.'
+  usage: 'remove from, <blacklist/banlist>, usernameHere\nExtra Info: Either blacklist or banlist must be selected, the username is to be written as seen in discord chat or as an \'@\' mention.'
 };
 

@@ -29,5 +29,5 @@ exports.conf = {
 exports.help = {
   name: 'set timeout',
   description: 'Change the timeout for the "fun" commands.',
-  usage: 'set timeout, <####>. Set the timeout in seconds (in digits).'
+  usage: 'set timeout, <####>\nExtra Info: Set the timeout in seconds (in digits).'
 };

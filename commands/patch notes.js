@@ -39,5 +39,5 @@ exports.conf = {
 exports.help = {
   name: 'patch notes',
   description: 'Displays the latest patch notes.',
-  usage: 'patch notes, all. Using \`all\` is optional and will return the full patch notes thread.'
+  usage: 'patch notes, <all>\nExtra Info: Using \'all\' is optional and will return the full patch notes thread.'
 };

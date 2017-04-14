@@ -80,5 +80,5 @@ exports.conf = {
 exports.help = {
   name: 'daily',
   description: 'Display the selected dailies.',
-  usage: 'daily, [tomorrow] [pve/pvp/wvw/fotm/special]. Calling the function with no daily type will return the full list of dailies. Using \`tomorrow\` is optional.'
+  usage: 'daily, <tomorrow> <pve/pvp/wvw/fotm/special>. Calling the function with no daily type will return the full list of dailies. Using \`tomorrow\` is optional.'
 };

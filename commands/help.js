@@ -5,7 +5,7 @@ exports.run = (client, message, params, perms) => {
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
     let modHelp = [];
     let funHelp = [];
-    let sendOut = `= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n`;
+    let sendOut = `= Command List =\n\n[Use ${settings.prefix}help, <commandname> for details]\n\n`;
     sendOut += client.commands.filter(function(c){//first only show the commands you are authorized to see
       if(c.conf.enabled === false) return;
       if(c.conf.permLevel <= 2 && c.conf.type !== "fun"){//split these up to have a separate mod help menu below
@@ -54,5 +54,5 @@ exports.conf = {
 exports.help = {
   name: 'help',
   description: 'Displays all the available commands for your permission level.',
-  usage: 'help, [command]'
+  usage: 'help, <command>\nExtra Info: Calling help with a command will show extra info for the command. With no commands it will list all commands.'
 };

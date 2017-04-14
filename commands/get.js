@@ -42,5 +42,5 @@ exports.conf = {
 exports.help = {
   name: 'get',
   description: 'Will return users on the queried list.',
-  usage: 'get, [blacklist/banlist]. Either blacklist or banlist must be selected, the username is to be written as seen in discord chat, nothing fancy.'
+  usage: 'get, <blacklist/banlist>\nExtra Info: Either blacklist or banlist must be selected.'
 };

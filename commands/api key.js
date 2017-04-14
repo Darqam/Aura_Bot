@@ -51,5 +51,5 @@ exports.conf = {
 exports.help = {
   name: 'api key',
   description: 'Adds your API key to the bot\'s database',
-  usage: 'api key, [yourApiKey]'
+  usage: 'api key, <yourApiKey>'
 };
