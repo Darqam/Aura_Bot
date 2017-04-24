@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 exports.run = (client, message) => {
 
+if(message.channel.type === "dm") return message.channel.send("Not available in DMs.");
+
 const embed = new Discord.RichEmbed()
     .setTitle('General Information')
     .setDescription(`Information about ${message.guild.member(client.user).displayName}, and ${message.guild.name} server.`)
