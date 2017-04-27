@@ -6,7 +6,7 @@ exports.run = (client, message, params) => {
     let details = "";
     if(params.length){ details = params[0].trim().toUpperCase(); }
 
-    message.channel.sendMessage("Fetching RSS feed...");
+    message.channel.send("Fetching RSS feed...");
     
     functions.checkReleaseNotes().then(releaseNotes => { 
         let threadRss = releaseNotes[thread_offset].meta.xmlurl;
@@ -20,9 +20,9 @@ exports.run = (client, message, params) => {
                 description = description.replace(/\&\#8211\;/g, "-");
                 
                 output = "\n"+notes.title+": "+notes.link+"\n\n```"+description+"```"+output;
-                if(details !== "ALL") return message.channel.sendMessage(output);//should hit send right away if only want latest patch note
+                if(details !== "ALL") return message.channel.send(output);//should hit send right away if only want latest patch note
             }
-            message.channel.sendMessage(output, {split:true});//split message at 2k characters if need be
+            message.channel.send(output, {split:true});//split message at 2k characters if need be
             
         });
         

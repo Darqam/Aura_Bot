@@ -7,10 +7,10 @@ function add(a, b) {//shhhh, don't question it
 
 exports.run = (client, message) => {   
     //I need to learn more about asynchronous JS to do this since I am gathering from 4 zones and need them synched
-    message.channel.sendMessage("Give me a few moments, looking that up.");
+    message.channel.send("Give me a few moments, looking that up.");
     let url = "https://api.guildwars2.com/v2/guild/"+settings.guildID+"/treasury"+settings.userToken;
     functions.isApiKill(url, function forTreasure(data){
-        if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+        if(data === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
         //first store item_ids in array
         //go into needed_by, loop over objects and add count
@@ -23,10 +23,10 @@ exports.run = (client, message) => {
 
         url = "https://api.guildwars2.com/v2/items?ids="+item_id.join(",");
         functions.isApiKill(url, function forTreasure(dataB){
-            if(dataB === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+            if(dataB === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
             let item_names = dataB.map(y => {return y.name;});
-            if(item_names.length !== item_needed.length) return message.channel.sendMessage("Something went bad with data lookup.");
+            if(item_names.length !== item_needed.length) return message.channel.send("Something went bad with data lookup.");
 
             const longest = item_names.reduce((long, str) => Math.max(long, str.length), 0);
 

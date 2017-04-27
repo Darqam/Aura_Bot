@@ -5,7 +5,7 @@ const stripIndent = require("common-tags/lib/stripIndent");
 
 function sendEmbed(message, jsonData){
     const embed = new Discord.RichEmbed()
-        .setTitle(`${message.member.displayName}'s Money count`)
+        .setTitle(`${message.guild ? message.member.displayName : message.author.username}'s Money count`)
         .setDescription('A quick overview of your GW2 wallet.')
         .setColor(0xf44842)
         .setThumbnail(message.author.avatarURL)
@@ -43,10 +43,7 @@ function sendEmbed(message, jsonData){
         Shards of Zhaitan: ${jsonData["currencies"]["6"].amount}
         Fractal Relics: ${jsonData["currencies"]["7"].amount}
         Pristine Fractal Relics: ${jsonData["currencies"]["24"].amount}`);
-    message.channel.sendEmbed(
-        embed,
-        { disableEveryone: true }
-    ).catch(console.log);
+    message.channel.send({embed}).catch(console.log);
 }
 
 exports.run = (client, message, params) => {
@@ -54,7 +51,7 @@ exports.run = (client, message, params) => {
         if(user_key === "") return;//handle message is sent in getUserKey function
         let url = "https://api.guildwars2.com/v2/account/wallet?access_token="+user_key;
         functions.isApiKill(url, function afterUrl(data){
-            if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+            if(data === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
             if(params[0]){
                 for(let entry in data){

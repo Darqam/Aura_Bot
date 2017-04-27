@@ -1,5 +1,5 @@
 exports.run = (client, message) => {
-    message.channel.sendMessage("HYPE!!!!!!\nhttp://i.imgur.com/1d58kOi.jpg");
+    message.channel.send("HYPE!!!!!!\nhttp://i.imgur.com/1d58kOi.jpg");
 };
 exports.conf = {
   enabled: true,

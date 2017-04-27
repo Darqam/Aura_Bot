@@ -19,26 +19,26 @@ exports.run = (client, message, params) => {
         url = "https://api.guildwars2.com/v2/achievements/daily";
     }
     functions.isApiKill(url, function onComplete(data) {
-        if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+        if(data === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
         if((query == "") || (query == "ALL"))//show all dailies
         {
             functions.lookupAllDaily(message, data, function post(output){
-                message.channel.sendMessage(output);
+                message.channel.send(output);
             });
         }
         else if((query == "FOTM") || (query == "FRACTALS") || (query == "FRACTAL"))
         {
             functions.lookupDaily(message, data, "fractals", function post(output){
                 output = "Fractal dailies: "+output;
-                message.channel.sendMessage(output);
+                message.channel.send(output);
             });
         }
         else if(query == "PVE")
         {
             functions.lookupDaily(message, data, "pve", function post(output){
                 output = "PvE dailies: "+output;
-                message.channel.sendMessage(output);
+                message.channel.send(output);
             });
             
         }
@@ -46,26 +46,26 @@ exports.run = (client, message, params) => {
         {
             functions.lookupDaily(message, data, "pvp", function post(output){
                 output = "PvP dailies: "+output;
-                message.channel.sendMessage(output);
+                message.channel.send(output);
             });
         }
         else if(query == "WVW")
         {
             functions.lookupDaily(message, data, "wvw", function post(output){
                 output = "WvW dailies: "+output;
-                message.channel.sendMessage(output);
+                message.channel.send(output);
             });
         }
         else if((query == "SPECIAL") || (query == "FESTIVAL"))
         {
             functions.lookupDaily(message, data, "special", function post(output){
                 output = "Festival dailies: "+output;
-                message.channel.sendMessage(output);
+                message.channel.send(output);
             });
         }
         else
         {
-            message.channel.sendMessage("I don't recognize that query. Please try with one of the following parameters (caps not important): PvE/PvP/WvW/Fractals/Festival");
+            message.channel.send("I don't recognize that query. Please try with one of the following parameters (caps not important): PvE/PvP/WvW/Fractals/Festival");
         }
     });
 };

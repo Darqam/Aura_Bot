@@ -13,10 +13,10 @@ exports.run = (client, message, params) => {
 
     
     functions.getUserKey(message, message.author, function onComplete(user_key){
-        if(user_key === "") return message.channel.sendMessage("Could not find an API key associated with your discord ID.");
+        if(user_key === "") return message.channel.send("Could not find an API key associated with your discord ID.");
         let url = "https://api.guildwars2.com/v2/account/achievements?access_token="+user_key;
         functions.isApiKill(url, function afterUrl(data){
-            if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+            if(data === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
             for(var key in data)
             {
@@ -83,7 +83,7 @@ exports.run = (client, message, params) => {
                     output = output.replace(/,(\s*,)+/, ",");// removes instances of [, ,]
                     output = output.replace(/,\s\s+/,"");//removes instances where comma is trailing at the end
                     
-                    message.channel.sendMessage(output);
+                    message.channel.send(output);
                 }
                 
             }

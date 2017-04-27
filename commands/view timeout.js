@@ -1,7 +1,7 @@
 const variables = require('../files/variables.json');
 
 exports.run = (client, message) => {
-    message.channel.sendMessage("The current timeout is: "+variables.timeOut/1000+" seconds.");
+    message.channel.send("The current timeout is: "+variables.timeOut/1000+" seconds.");
 };
 
 exports.conf = {

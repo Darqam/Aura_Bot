@@ -22,7 +22,7 @@ exports.run = (client, message) => {
 
 randomPuppy()
   .then(url => {
-    message.channel.sendMessage(url).then(msg =>{
+    message.channel.send(url).then(msg =>{
       newPic(url, function afterUrl(newUrl){
         if(newUrl === url) return;
         if(newUrl === false) return console.log('Gave up on puppy query'); //if you couldn't find anything

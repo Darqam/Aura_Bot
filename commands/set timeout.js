@@ -4,13 +4,13 @@ const variables = require('../files/variables.json');
 
 exports.run = (client, message, params) => {
 
-    if(!parseInt(params[0])) return message.channel.sendMessage("The duration was not an integer value.");
+    if(!parseInt(params[0])) return message.channel.send("The duration was not an integer value.");
     
     variables.timeOut = parseInt(params[0])*1000;
     fs.writeFile(settings.botPath+"files/variables.json", JSON.stringify(variables, null, 4), function (err){
-        if(!err) return message.channel.sendMessage("Current timeout is now: "+variables.timeOut/1000+" seconds.");
+        if(!err) return message.channel.send("Current timeout is now: "+variables.timeOut/1000+" seconds.");
         
-        message.channel.sendMessage("There was an issue in writting new timeout.");
+        message.channel.send("There was an issue in writting new timeout.");
         console.log("Issue in writing timeout to file: "+err.message);
     });
 

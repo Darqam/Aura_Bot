@@ -8,14 +8,14 @@ exports.run = (client, message) => {
         let output = "Kills still missing this week:\n```\n";
         let url = "https://api.guildwars2.com/v2/account/raids?access_token="+user_key;
         functions.isApiKill(url, function afterUrl(data){
-            if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+            if(data === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
             if(data == "")
-                return message.channel.sendMessage("```\nNo kills for you.\n```:regional_indicator_g: :regional_indicator_i: :regional_indicator_t:   :regional_indicator_g: :regional_indicator_u: :regional_indicator_d:");
+                return message.channel.send("```\nNo kills for you.\n```:regional_indicator_g: :regional_indicator_i: :regional_indicator_t:   :regional_indicator_g: :regional_indicator_u: :regional_indicator_d:");
 
             let keys = Object.keys(jsonData.bosses);
             let arrDiff = keys.filter(x => data.indexOf(x) < 0);//filter from the list the bosses that were killed, creating a list of unkilled bosses
             
-            if(arrDiff.length === 0) return message.channel.sendMessage(":first_place:```\nYou have defeated all of the evil forces, you may rest until next week.\n```");
+            if(arrDiff.length === 0) return message.channel.send(":first_place:```\nYou have defeated all of the evil forces, you may rest until next week.\n```");
             
             let i = 0;
             while(i < arrDiff.length)
@@ -25,7 +25,7 @@ exports.run = (client, message) => {
             }
             output += '```';
             
-            message.channel.sendMessage(output);
+            message.channel.send(output);
         });
     });
 };

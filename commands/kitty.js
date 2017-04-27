@@ -4,8 +4,8 @@ exports.run = (client, message) => {
 
   snekfetch.get("http://random.cat/meow").then( r => {
     //console.log(r);
-    if (r.status.statusCode < 200 || r.status.statusCode > 299 || r.ok == false) return message.channel.sendMessage("Something messed up");
-    message.channel.sendMessage(r.body.file);
+    if (r.status.statusCode < 200 || r.status.statusCode > 299 || r.ok == false) return message.channel.send("Something messed up");
+    message.channel.send(r.body.file);
   });
 };
 

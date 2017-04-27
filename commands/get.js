@@ -10,10 +10,10 @@ exports.run = (client, message, params) => {
 
     if(params[0].toUpperCase() === "BLACKLIST"){ listPath = blacklistPath; }
     else if(params[0].toUpperCase() === "BANLIST"){ listPath = banlistPath; }
-    else{ return message.channel.sendMessage("Could not understand list type, please choose either \`blacklist\` or \`banlist\`.")}
+    else{ return message.channel.send("Could not understand list type, please choose either \`blacklist\` or \`banlist\`.")}
     
     let json = require(listPath);
-    if(json.length === 0) return message.channel.sendMessage("No users in list.");
+    if(json.length === 0) return message.channel.send("No users in list.");
     for(let i in json){
         let badId = json[i].trim();
         if(badId != ""){//don't try to find an ID for a blank line
@@ -27,7 +27,7 @@ exports.run = (client, message, params) => {
     }
 
     badOutput += "```";
-    message.channel.sendMessage(badOutput);
+    message.channel.send(badOutput);
     
     delete require.cache[require.resolve(listPath)];//removes cache for json file containing baddies
     

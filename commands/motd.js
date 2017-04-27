@@ -5,9 +5,9 @@ exports.run = function(client, message){
     let url = "https://api.guildwars2.com/v2/guild/"+settings.guildID+settings.userToken;
 
     functions.isApiKill(url, function getMOTD(data) {
-        if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+        if(data === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
-        message.channel.sendMessage("The message of the day is: \n```\n"+data.motd+"```");	
+        message.channel.send("The message of the day is: \n```\n"+data.motd+"```");	
     }); 
 };
 

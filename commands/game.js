@@ -1,12 +1,12 @@
 exports.run = (client, message, params) => {
-    if(message.channel.type === "dm") return message.channel.sendMessage("Can't set game in DMs.");
+    if(message.channel.type === "dm") return message.channel.send("Can't set game in DMs.");
     if(!params[0]){ 
         client.user.setGame(null); 
-        message.channel.sendMessage("Yes mother, I'll stop playing.");
+        message.channel.send("Yes mother, I'll stop playing.");
     }
     else{
         client.user.setGame(params[0]);
-        message.channel.sendMessage("Now playing "+params[0]);
+        message.channel.send("Now playing "+params[0]);
     }
 };
 exports.conf = {

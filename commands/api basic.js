@@ -6,16 +6,13 @@ function sendEmbed(message, data, cap, server, cmdr, type){
         .setTitle(data["name"])
         .setAuthor(message.author.username)
         .setDescription('A quick overview of your account.')
-        .setColor(message.member.highestRole.color)
+        .setColor(message.guild ? message.member.highestRole.color : 0x00AE86)
         .setThumbnail(message.author.avatarURL)
         .addField("Account play time", `${(data["age"]*0.0000115741).toFixed(2)} days`)
         .addField("Ranks", `WvW: ${data["wvw_rank"]}, FotM: ${data["fractal_level"]}`)
         .addField("Daily AP", cap)
         .addField("Misc", `${type}\nAccount is on ${server}.\n${cmdr}`);
-    message.channel.sendEmbed(
-        embed,
-        { disableEveryone: true }
-    ).catch(console.log);
+    message.channel.send({embed}).catch(console.log);
 
 }
 
@@ -26,7 +23,7 @@ exports.run = (client, message) => {
             let url = "https://api.guildwars2.com/v2/account?access_token="+user_key;
             
             functions.isApiKill(url, function onComplete(data) {
-                if(data === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+                if(data === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
                 let server = "";
                 let type = "";

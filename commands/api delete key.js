@@ -9,18 +9,18 @@ exports.run = (client, message) => {
         }
 
         let content = JSON.parse(data);
-        if(!content[message.author.id]) return message.channel.sendMessage("Could not find an API key associated with your account. Nothing deleted.");
+        if(!content[message.author.id]) return message.channel.send("Could not find an API key associated with your account. Nothing deleted.");
 
         if(delete content[message.author.id]){
             fs.writeFile(api_file, JSON.stringify(content, null, 4), function (err){
-                if(!err) return message.channel.sendMessage("Your API key has been successfully removed.");
+                if(!err) return message.channel.send("Your API key has been successfully removed.");
                 
-                message.channel.sendMessage("There was an issue in deleting your API key.");
+                message.channel.send("There was an issue in deleting your API key.");
                 console.log("Had issue writting file. "+err.message);
             });
         }
         else{
-            message.channel.sendMessage("There was an issue in deleting your API key.");
+            message.channel.send("There was an issue in deleting your API key.");
             console.log("Had issues deleting element from json object");
         }
     })
