@@ -39,7 +39,7 @@ exports.run = (client, message, params, perms) => {
     if (client.commands.has(command)) {
       command = client.commands.get(command);
       if(perms >= command.conf.permLevel){//only show details if user has proper perm level
-        message.channel.sendCode('asciidoc', `= ${command.help.name} = \n${command.help.description}\nusage::${command.help.usage}`);
+        message.channel.send('asciidoc', `= ${command.help.name} = \n${command.help.description}\nusage::${command.help.usage}`);
       }
     }
   }

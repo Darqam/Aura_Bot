@@ -39,7 +39,7 @@ exports.run = (client, message) => {
             });
             out_arr.sort();//make alphabetical
             out_arr.unshift("Name => Amount Needed\n---------------------------");//adding message header
-            message.channel.sendCode('asciidoc',out_arr).catch(console.error);//looks pretty with sendCode
+            message.channel.send('asciidoc',out_arr).catch(console.error);//looks pretty with sendCode
         });
     });
 };
