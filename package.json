@@ -1,8 +1,8 @@
 {
-  "name": "Aura-Gw2-Bot",
+  "name": "aura_bot",
   "version": "3.0.0",
   "description": "Bot for Aura discord",
-  "main": "aura_bot_V3.js",
+  "main": "aura_bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
