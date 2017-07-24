@@ -30,7 +30,7 @@ exports.run = (client, message, params, perms) => {
       sendOut += `\n\n== Mod Commands ==\n\n`;
       sendOut += modHelp.map(function(obj) { return `${settings.prefix}${obj.help.name}${' '.repeat(longest - obj.help.name.length)} :: ${obj.help.description}`; }).join('\n');//then map the commands to a usable array format and join them into a string
     }
-    message.author.sendCode('asciidoc',sendOut);
+    message.author.send(sendOut, {code: 'asciidocs'});
     message.reply("Sent you a DM with information.");
     
 
@@ -39,7 +39,7 @@ exports.run = (client, message, params, perms) => {
     if (client.commands.has(command)) {
       command = client.commands.get(command);
       if(perms >= command.conf.permLevel){//only show details if user has proper perm level
-        message.channel.send('asciidoc', `= ${command.help.name} = \n${command.help.description}\nusage::${command.help.usage}`);
+        message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage::${command.help.usage}`, {code: 'asciidoc'});
       }
     }
   }
