@@ -13,7 +13,7 @@ const embed = new Discord.RichEmbed()
     .setTimestamp()
     .setFooter('https://github.com/Darqam/Aura_Bot');
 
-  message.channel.sendEmbed(embed);
+  message.channel.send( {embed} );
 };
 
 exports.conf = {

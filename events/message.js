@@ -17,7 +17,7 @@ module.exports = message => {
     cmd = client.commands.get(client.aliases.get(command));
   }
   else{
-    message.channel.sendMessage("If that was intended for me, I didn't understand it.");
+    message.channel.send("If that was intended for me, I didn't understand it.");
   }
   if (cmd) {
     if (perms < cmd.conf.permLevel){
@@ -25,7 +25,7 @@ module.exports = message => {
       return;
     }
     else{//here check cmd.conf.type for "fun", if they are make the needed checks here
-      if(cmd.conf.enabled === false) return message.channel.sendMessage("If that was intended for me, I didn't understand it.");
+      if(cmd.conf.enabled === false) return message.channel.send("If that was intended for me, I didn't understand it.");
       if(cmd.conf.type === "fun"){
         if(settings.funChannels.indexOf(message.channel.id) !== -1 || message.channel.type === "dm"){
           if(client.timedOut(message) === false || message.channel.type === "dm"){

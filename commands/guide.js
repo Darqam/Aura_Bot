@@ -11,7 +11,7 @@ exports.run = (client, message) => {
     .setTimestamp()
     .setFooter('Happy Raiding!');
 
-  message.channel.sendEmbed(embed);
+  message.channel.send( {embed} );
 
 };
 exports.conf = {

@@ -36,7 +36,7 @@ var self = module.exports = {
         let ids = data[type].map(achiev => achiev["id"]);
         let url = "https://api.guildwars2.com/v2/achievements?ids="+ids.join(",");
         self.isApiKill(url, function onComplete(ach_arr) {
-            if(ach_arr === false) return message.channel.sendMessage("API is on :fire:, please wait for the :fire_engine: to arrive.");
+            if(ach_arr === false) return message.channel.send("API is on :fire:, please wait for the :fire_engine: to arrive.");
 
             cb(`\`\`\`\n${ach_arr.map(cheevo => cheevo["name"]).join(`\n`)}\`\`\``);
         });
