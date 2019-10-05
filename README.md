@@ -1,3 +1,5 @@
+# This has not been updated in years, if you find your way here; you should probably not use this.
+
 # Aura_Bot
 A discord bot created to query the GW2 API and perform a few other fun and useful tasks
 
